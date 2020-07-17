@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template1">
+<head>
+<meta charset="utf-8">
+<title>Form patients</title>
+</head>
+<body>
+	<div layout:fragment="pageContent">
+		<div class="container mt-5">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header" th:if="${mode=='new'}">Formulaire de saisie d'un nouveau patient</div>
+				<div class="card-header" th:if="${mode=='edit'}">Formulaire de mise à jour d'un nouveau patient</div>
+				<div class="card-body">
+					<form th:action="@{savePatient}" method="post">
+					<div class="form-group">
+							<label class="control-label">ID:</label>
+							<label class="control-label" th:text="${patient.id}"></label>
+							 <input type="hidden" name="id" class="form-control" th:value="${patient.id}">
+							<label class="control-label" th:value="${patient.id}"></label>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Name:</label> 
+							<input type="text" name="name" class="form-control" th:value="${patient.name}">
+							<span th:errors=${patient.name} class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Score:</label> 
+							<input type="text" name="score" class="form-control" th:value="${patient.score}">
+							<span th:errors=${patient.score} class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Date Naissance:</label> 
+							 <input type="date" name="dateNaissance" class="form-control" th:value="${patient.dateNaissance}">
+							 <span th:errors=${patient.dateNaissance} class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Malade:</label> 
+							<input type="checkbox" name="malade" th:checked="${patient.malade}">
+							<span th:errors=${patient.malade} class="text-danger"></span>
+						</div>
+						<button class="btn btn-success" type="submit">Save</button>
+					</form>
+				</div>
+			</div>
+           </div>
+		</div>
+	</div>
+</body>
+</html>

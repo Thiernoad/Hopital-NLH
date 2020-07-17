@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      
+      
+<head>
+<meta charset="utf-8">
+<title>Patients</title>
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css"/>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Nothern Lights Hospital</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{patients}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Medcins</a>
+    </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Patients
+      </a>
+      <div class="dropdown-menu">
+        <a sec:authorize ="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{formPatient}">Ajouter</a>
+        <a class="dropdown-item" href="#">Chercher</a>
+        
+      </div>
+    </li>
+    </ul>
+    
+    <ul class="navbar-nav ml-auto">
+    <!-- Dropdown -->
+    <li class="nav-item dropdown ">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+      <span sec:authorize="isAuthenticated()">
+        <span sec:authentication="name"></span>
+        </span>
+        <span sec:authorize="!isAuthenticated()">
+        <span>Connect</span>
+        </span>
+      </a>
+      <div class="dropdown-menu">
+        <a sec:authorize="isAnonymous()"class="dropdown-item" th:href="@{login}">Login</a>
+        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">Logout</a>
+        <a class="dropdown-item" href="#">Profile</a>
+        
+      </div>
+    </li>
+  </ul>
+</nav>
+<section layout:fragment="pageContent"></section>
+
+</body>
+</html>
